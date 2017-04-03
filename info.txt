@@ -1,0 +1,52 @@
+THEORY
+    https://en.wikipedia.org/wiki/Constraint_programming
+
+INSTALLATION OF OR-TOOLS AND TUTORIAL
+    https://developers.google.com/optimization/installing
+    https://github.com/google/or-tools
+    https://acrogenesis.com/or-tools/documentation/user_manual/index.html
+
+DEFINITION OF THE PROBLEM
+    https://en.wikipedia.org/wiki/List_of_NP-complete_problems
+    https://en.wikipedia.org/wiki/Discrete_tomography
+    https://en.wikipedia.org/wiki/Nonogram
+
+DOCUMENTATION
+    the constraint_solver's documentation:
+        http://www.lia.disi.unibo.it/Staff/MicheleLombardi/or-tools-doc/reference_manual/or-tools/src/constraint_solver/constraint__solver_8h.html
+    the constraint_solver on github:
+        https://github.com/google/or-tools/blob/master/src/constraint_solver/constraint_solver.h
+    Out of the box variables and values selection primitives for the .Phase method:
+        http://www.lia.disi.unibo.it/Staff/MicheleLombardi/or-tools-doc/user_manual/manual/search_primitives/out_of_the_box_search_primitives.html
+
+EXAMPLE
+    To install or-tools:
+        https://developers.google.com/optimization/installing
+        | python setup.py install
+
+    First, images have to be converted to .txt
+        | python3 png_to_txt.py images/death_star/death_star_8.jpg
+    These .txt files contain 2 lines
+        - the number of pixels per row
+        - and the number of pixels per column
+
+    The .txt files contain the data to process
+    To run the spiral example:
+        | sudo python3 nonogram_solver.py images/spiral/spiral_10.txt
+    To print only the first solution:
+        | sudo python3 nonogram_solver.py images/death_star/death_star_8.txt
+    To print ALL the solutions: add the -a argument
+        | sudo python3 nonogram_solver.py images/death_star/death_star_8.txt -a
+
+PERFORMANCES
+    The measurement of the performance has been done on test_256.txt
+    Phase(): https://developers.google.com/optimization/cp/queens#decision-builder
+    IntVarStrategy: http://www.lia.disi.unibo.it/Staff/MicheleLombardi/or-tools-doc/reference_manual/or-tools/src/constraint_solver/classoperations__research_1_1Solver.html#8bda7ed6e7e533cca4c44eba6efffc8b
+    IntValueStrategy: http://www.lia.disi.unibo.it/Staff/MicheleLombardi/or-tools-doc/reference_manual/or-tools/src/constraint_solver/classoperations__research_1_1Solver.html#e63acd77b8c2ee40387795051298f659
+
+    0.050s
+        db = solver.Phase(x_flat, solver.CHOOSE_FIRST_UNBOUND, solver.ASSIGN_MAX_VALUE)
+    0.116s
+        db = solver.Phase(x_flat, solver.CHOOSE_FIRST_UNBOUND, solver.ASSIGN_MIN_VALUE)
+    9.719s:
+        db = solver.Phase(x_flat, solver.CHOOSE_PATH, solver.ASSIGN_MAX_VALUE)

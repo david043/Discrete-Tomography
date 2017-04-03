@@ -1,0 +1,12 @@
+discrete_tomography.py
+    This file is an or-tools example from the main archive.
+    To get it:
+        Download the tar.gz for Python (all platforms) at:
+            https://developers.google.com/optimization/installing
+        And the file is there:
+            ./ortools_examples/examples/python/discrete_tomography.py
+
+nonogram.py
+    This file comes from github:
+        https://gist.github.com/anonymous/d575a0287c8299a8eaba
+    It has been slightly modified: a try/except block has been removed.
